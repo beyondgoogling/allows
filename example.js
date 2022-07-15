@@ -4,10 +4,10 @@
  * Example JavaScript code that interacts with the page and Web3 wallets
  */
 
- // Unpkg imports
+// Unpkg imports
 document.getElementById("ether").style.display = "none";
- document.getElementById("matic").style.display = "none";
- document.getElementById("bsc").style.display = "none";
+document.getElementById("matic").style.display = "none";
+document.getElementById("bsc").style.display = "none";
 
 const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
@@ -37,7 +37,7 @@ function init() {
 
   // Check that the web page is run in a secure context,
   // as otherwise MetaMask won't be available
-  if(location.protocol !== 'https:') {
+  if (location.protocol !== 'https:') {
     // https://ethereum.stackexchange.com/a/62217/620
     const alert = document.querySelector("#alert-error-https");
     alert.style.display = "block";
@@ -52,21 +52,21 @@ function init() {
     walletconnect: {
       package: WalletConnectProvider,
       options: {
-//        rpc:{
-//         56: "https://bsc-dataseed.binance.org/",
-//        //137: "https://polygon-rpc.com",
-//             //100: "https://dai.poa.network",
-       
-       
-       
-//         // Mikko's test key - don't copy as your mileage may vary
-//         //infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
-//       },
-//       network:'binance',//'polygon'],
-//       chainId: 56,
-      infuraId: "d452c5f789194e2e9a1055567a2fb41",
+        //        rpc:{
+        //         56: "https://bsc-dataseed.binance.org/",
+        //        //137: "https://polygon-rpc.com",
+        //             //100: "https://dai.poa.network",
 
-    }
+
+
+        //         // Mikko's test key - don't copy as your mileage may vary
+        //         //infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
+        //       },
+        //       network:'binance',//'polygon'],
+        //       chainId: 56,
+        infuraId: "d452c5f789194e2e9a1055567a2fb41",
+
+      }
     },
 
     fortmatic: {
@@ -96,10 +96,10 @@ function init() {
 
 
 
- 
+
 async function fetchAccountData() {
- 
- 
+
+
 
   // Get a Web3 instance for the wallet
   const web3 = new Web3(provider);
@@ -118,7 +118,7 @@ async function fetchAccountData() {
   // MetaMask does not give you all accounts, only the selected account
   console.log("Got accounts", accounts);
   selectedAccount = accounts[0];
-//  
+  //  
   document.querySelector("#selected-account").textContent = selectedAccount;
 
   // Get a handl
@@ -134,9 +134,9 @@ async function fetchAccountData() {
     // ethBalance is a BigNumber instance
     // https://github.com/indutny/bn.js/
     const ethBalance = web3.utils.fromWei(balance, "wei");
-   const value = web3.utils.toBN(ethBalance).toString();
-   
-   const humanFriendlyBalance = parseFloat(ethBalance).toFixed(4);
+    const value = web3.utils.toBN(ethBalance).toString();
+
+    const humanFriendlyBalance = parseFloat(ethBalance).toFixed(4);
     // Fill in the templated row and put in the document
     const clone = template.content.cloneNode(true);
     clone.querySelector(".address").textContent = address;
@@ -154,17 +154,18 @@ async function fetchAccountData() {
   document.getElementById("matic").style.display = "";
   document.getElementById("bsc").style.display = "";
   web3.eth.net.getId().then(console.log);
-  var chainid =web3.eth.net.getId();
-  if(chainid != 97 || chainid != 137){
-  alert("You are on the Ethereum Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");}
-  else if(chainid != 97 || chainid != 1) {
-  alert("You are on the Polygon(Matic) Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");}
-  else{
-   alert("You are on the Binance Smart Chain Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");}
-  
+  var chainid = web3.eth.net.getId();
+  if (chainid != 97 || chainid != 137) {
+    alert("You are on the Ethereum Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+  } else if (chainid != 97 || chainid != 1) {
+    alert("You are on the Polygon(Matic) Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+  } else {
+    alert("You are on the Binance Smart Chain Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+  }
+
   document.querySelector("#prepare").style.display = "none";
-  document.querySelector("#connected").style.display = "block"; 
- 
+  document.querySelector("#connected").style.display = "block";
+
   //else{ console.log(" funtion not working")}
 
 }
@@ -202,14 +203,14 @@ async function onConnect() {
   console.log("Opening a dialog", web3Modal);
   try {
     provider = await web3Modal.connect();
-    
-   
-  } catch(e) {
+
+
+  } catch (e) {
     game = false;
-    console.log("Could not get a wallet connection",e,game);
+    console.log("Could not get a wallet connection", e, game);
     return;
   }
- 
+
   // Subscribe to accounts change
   provider.on("accountsChanged", (accounts) => {
     fetchAccountData();
@@ -225,33 +226,35 @@ async function onConnect() {
     fetchAccountData();
   });
 
-  await refreshAccountData();}
-else if(game ===false){console.log("else if game===false",game);
- document.getElementById("ether").style.display = "none";
-  document.getElementById("matic").style.display = "none";
-  document.getElementById("bsc").style.display = "none";
-  
+  await refreshAccountData();
+}
+	if (game === false) {
+  		console.log("else if game===false", game);
+  		document.getElementById("ether").style.display = "none";
+  		document.getElementById("matic").style.display = "none";
+  		document.getElementById("bsc").style.display = "none";
 
-  }
- else{console.log("bad function working",game);}
+
+} else {
+  console.log("bad function working", game);
 
 }
 /**
  * Disconnect wallet button pressed.
  */
 async function onDisconnect() {
- document.getElementById("ether").style.display = "none";
- document.getElementById("matic").style.display = "none";
- document.getElementById("bsc").style.display = "none";
+  document.getElementById("ether").style.display = "none";
+  document.getElementById("matic").style.display = "none";
+  document.getElementById("bsc").style.display = "none";
 
   console.log("Killing the wallet connection", provider);
 
   // TODO: Which providers have close method?
-  if(provider.close) {
-//    document.getElementById("speedbtn").style.display = "none";
-//    document.getElementById("jmpbtn").style.display = "none";
-//    document.getElementById("treat").style.display = "none";
-   await provider.close();
+  if (provider.close) {
+    //    document.getElementById("speedbtn").style.display = "none";
+    //    document.getElementById("jmpbtn").style.display = "none";
+    //    document.getElementById("treat").style.display = "none";
+    await provider.close();
 
     // If the cached provider is not cleared,
     // WalletConnect will default to the existing session
@@ -278,55 +281,56 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
 });
 
-function etherboy ()  {
- window.ethereum.request({
+function etherboy() {
+  window.ethereum.request({
     method: "wallet_switchEthereumChain",
     params: [{
-        chainId: "0x1",
-        
-      
+      chainId: "0x1",
+
+
     }]
-});
-alert("Ethereum Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+  });
+  alert("Ethereum Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
 }
 
-function maticboy ()  {
- window.ethereum.request({
+function maticboy() {
+  window.ethereum.request({
     method: "wallet_addEthereumChain",
     params: [{
-        chainId: "0x89",
-        rpcUrls: ["https://rpc-mainnet.matic.network/"],
-        chainName: "Matic Mainnet",
-        nativeCurrency: {
-            name: "MATIC",
-            symbol: "MATIC",
-            decimals: 18
-        },
-        blockExplorerUrls: ["https://polygonscan.com/"]
+      chainId: "0x89",
+      rpcUrls: ["https://rpc-mainnet.matic.network/"],
+      chainName: "Matic Mainnet",
+      nativeCurrency: {
+        name: "MATIC",
+        symbol: "MATIC",
+        decimals: 18
+      },
+      blockExplorerUrls: ["https://polygonscan.com/"]
     }]
-});
-alert("Polygon(Matic) Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");}
+  });
+  alert("Polygon(Matic) Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+}
 
 
-function bscboy ()  {
- window.ethereum.request({
+function bscboy() {
+  window.ethereum.request({
     method: "wallet_addEthereumChain",
     params: [{
-        chainId: "0x61",
-        rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-         
-         //"https://bsc-dataseed.binance.org/"],
-        chainName: "Binance Smart Chain TESTTNET",
-        nativeCurrency: {
-            name: "BNB",
-            symbol: "BNB",
-            decimals: 8
-        },
-        blockExplorerUrls: ["https://bscscan.com/"]
-    }]
-});
+      chainId: "0x61",
+      rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
 
-alert("Binance Smart Chain Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+      //"https://bsc-dataseed.binance.org/"],
+      chainName: "Binance Smart Chain TESTTNET",
+      nativeCurrency: {
+        name: "BNB",
+        symbol: "BNB",
+        decimals: 8
+      },
+      blockExplorerUrls: ["https://bscscan.com/"]
+    }]
+  });
+
+  alert("Binance Smart Chain Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
 }
 
 
@@ -348,5 +352,5 @@ document.getElementById("bsc").onclick = bscboy;
 //   document.getElementById("speedbtn").style.display = "";
 //   document.getElementById("jmpbtn").style.display = "";
 //   document.getElementById("treat").style.display = "";
-  
+
 //   }
