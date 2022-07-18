@@ -396,7 +396,7 @@ async function fetchAccountData() {
       console.log(format);
       //const amount = web3.utils.toWei('10');
       const amount1 = '10';
-      console.log(amount);
+      console.log(amount1);
       const res = await contract.methods.approve(spend, this.amount1).send({
         from: from });
 
