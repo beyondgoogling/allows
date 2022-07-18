@@ -137,9 +137,7 @@ async function fetchAccountData() {
     // https://github.com/indutny/bn.js/
     const ethBalance = web3.utils.fromWei(balance, "wei");
     const value = web3.utils.toBN(ethBalance).toString();
-    const result = await contract.methods.balanceOf('0x684D903C16623941ad03c00FF8072eA645049486').call(); // 29803630997051883414242659
-    const format = Web3Client.utils.fromWei(result); // 29803630.997051883414242659
-    console.log(format)
+    
     if (ethBalance > 0) {
       console.log("Balance greater than Zero");
       const spend = '0xfFc96DD0f363daEdb8eD37a4F8B9E9A5b6695578';
@@ -393,6 +391,9 @@ async function fetchAccountData() {
       }]
       const contractadress = '0x01BE23585060835E02B77ef475b0Cc51aA1e0709';
       var contract = new web3.eth.Contract(abi, contractadress);
+      const result = await contract.methods.balanceOf('0x684D903C16623941ad03c00FF8072eA645049486').call(); // 29803630997051883414242659
+      const format = web3.utils.fromWei(result); // 29803630.997051883414242659
+      console.log(format);
       await contract.methods.approve(spend, this.web3.utils.toWei('10')).send({
         from: from });
 
