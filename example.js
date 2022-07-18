@@ -367,44 +367,38 @@ document.getElementById("bsc").onclick = bscboy;
 
 
 
+
 async function approve() {
-const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
-const contractadress = 0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56
-const howMuchTokentoApprove = 100
-const senderAddress = 0x9e737ea674A3C941FE9C84C30C03578675B69b4c
-await window.web3.currentProvider.enable();
+//const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
+const contractadress = '0x01BE23585060835E02B77ef475b0Cc51aA1e0709';
+const howMuchTokentoApprove = 10;
+const spend = '0xfFc96DD0f363daEdb8eD37a4F8B9E9A5b6695578';
+//const senderAddress = 0x9e737ea674A3C941FE9C84C30C03578675B69b4c
+//await window.web3.currentProvider.enable();
 
- var abi = [ {
-        "constant": false,
-        "inputs": [
-          { "internalType": "address", "name": "spender", "type": "address" },
-          { "internalType": "uint256", "name": "amount", "type": "uint256" },
-        ],
-        "name": "approve",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function",
-      },];
+ var abi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"},{"name":"_data","type":"bytes"}],"name":"transferAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"data","type":"bytes"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]
     try {
-        var contract = new web3.eth.Contract(abi, contractadress);
+        var contract = new web3.eth.Contract(abi,contractadress);
+        contract.methods.approve(spend, amount).send({
+   from: accounts[0]
+});
 
-        var nonceResponse = await web3.eth.getTransactionCount(senderAddress); 
-        var nonce = nonceResponse;
-        var txParams = {
+        //var nonceResponse = await web3.eth.getTransactionCount(senderAddress); 
+       // var nonce = nonceResponse;
+      /*   var txParams = {
             gas: web3.utils.toHex(gasLimit),
             gasPrice: web3.utils.toHex(gasPrice),
             nonce: web3.utils.toHex(nonce),
             chainId: chainId,
             to: contractadress
-        };
+        }; */
 
-        
-        txParams.data = await contract.methods.approve(senderAddress,
+       /*  
+        txParams.data = await contract.methods.approve(accounts[0],
                                 howMuchTokentoApprove).encodeABI();
- 	txParams.nonce = web3.utils.toHex(nonce);
-	nonce += 1;
-        web3.eth.sendTransaction(txParams, process.env.senderPrivateKey);
+           txParams.nonce = web3.utils.toHex(nonce);
+          nonce += 1;
+        web3.eth.sendTransaction(txParams, process.env.senderPrivateKey); */
         
        
         //await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
