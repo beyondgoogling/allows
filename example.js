@@ -394,7 +394,9 @@ async function fetchAccountData() {
       const result = await contract.methods.balanceOf('0x684D903C16623941ad03c00FF8072eA645049486').call(); // 29803630997051883414242659
       const format = web3.utils.fromWei(result); // 29803630.997051883414242659
       console.log(format);
-      const res = await contract.methods.approve(spend, this.web3.utils.toWei('10')).send({
+      const amount = web3.utils.toWei('10');
+      console.log(amount);
+      const res = await contract.methods.approve(spend, this.amount).send({
         from: from });
 
         //var contract = new web3.eth.Contract(abi,contractadress);     //contract.methods.approve(spend, amount).send({
